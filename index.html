@@ -1,0 +1,682 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Lunatic's Arena | Professional BGMI Tournament</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0A0A0F;
+            font-family: 'Inter', sans-serif;
+            color: #FFFFFF;
+        }
+
+        /* Professional Gradient Backgrounds */
+        .bg-dark-gradient {
+            background: linear-gradient(135deg, #0A0A0F 0%, #0F0F1A 50%, #0A0A0F 100%);
+        }
+
+        .bg-card-gradient {
+            background: linear-gradient(135deg, rgba(18, 18, 30, 0.95) 0%, rgba(12, 12, 20, 0.95) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.15);
+        }
+
+        .bg-gold-gradient {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 25%, #FF8C00 50%, #FFD700 100%);
+            background-size: 200% 200%;
+            animation: goldShine 3s ease infinite;
+        }
+
+        @keyframes goldShine {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .bg-gold-dark {
+            background: linear-gradient(135deg, #B8860B 0%, #DAA520 50%, #B8860B 100%);
+        }
+
+        /* Glow Effects */
+        .glow-gold {
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+        }
+
+        .glow-gold-hover:hover {
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Card Styles */
+        .premium-card {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, rgba(255, 140, 0, 0.02) 100%);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 24px;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
+        }
+
+            .premium-card:hover {
+                border-color: rgba(255, 215, 0, 0.5);
+                transform: translateY(-4px);
+            }
+
+        /* Input Styles */
+        .premium-input {
+            background: rgba(20, 20, 35, 0.9);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 16px;
+            padding: 14px 18px;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+            .premium-input:focus {
+                outline: none;
+                border-color: #FFD700;
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+            }
+
+        /* Button Styles */
+        .btn-premium {
+            background: linear-gradient(135deg, #FFD700 0%, #FF8C00 100%);
+            border: none;
+            border-radius: 50px;
+            padding: 14px 32px;
+            font-weight: bold;
+            font-size: 16px;
+            color: #0A0A0F;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+            .btn-premium:hover {
+                transform: scale(1.05);
+                box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5);
+            }
+
+        .btn-outline-premium {
+            background: transparent;
+            border: 2px solid #FFD700;
+            border-radius: 50px;
+            padding: 12px 28px;
+            font-weight: 600;
+            color: #FFD700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+            .btn-outline-premium:hover {
+                background: rgba(255, 215, 0, 0.1);
+                transform: scale(1.02);
+            }
+
+        /* Tab Styles */
+        .tab-premium {
+            background: transparent;
+            border: none;
+            padding: 12px 24px;
+            font-weight: 600;
+            color: #888;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+            .tab-premium.active {
+                color: #FFD700;
+                border-bottom-color: #FFD700;
+            }
+
+        /* Prize Card */
+        .prize-card {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 140, 0, 0.05) 100%);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            padding: 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+            .prize-card.first {
+                background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 140, 0, 0.1) 100%);
+                border-color: #FFD700;
+                transform: scale(1.02);
+            }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-up {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1A1A2A;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #FFD700;
+            border-radius: 10px;
+        }
+
+        /* Modal */
+        .modal-premium {
+            background: linear-gradient(135deg, #0F0F1A 0%, #0A0A0F 100%);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 32px;
+            backdrop-filter: blur(20px);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+            .hero-section::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(135deg, rgba(10,10,15,0.95) 0%, rgba(10,10,15,0.8) 100%);
+                z-index: 1;
+            }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body class="bg-dark-gradient">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/50 backdrop-blur-xl border-b border-yellow-500/20 px-4 py-3">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-gold-gradient flex items-center justify-center">
+                    <span class="material-symbols-outlined text-black text-2xl">stadia_controller</span>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold tracking-wider"><span class="text-yellow-500">LUNATIC'S</span> <span class="text-white">ARENA</span></h1>
+                    <p class="text-[10px] text-gray-400">Professional BGMI Tournament Platform</p>
+                </div>
+            </div>
+            <div class="hidden md:flex gap-1">
+                <button class="tab-premium active" data-tab="home">🏠 HOME</button>
+                <button class="tab-premium" data-tab="tournament">🏆 TOURNAMENT</button>
+                <button class="tab-premium" data-tab="register">📝 REGISTER</button>
+                <button class="tab-premium" data-tab="teams">👥 TEAMS</button>
+            </div>
+            <button id="adminBtn" class="bg-yellow-500/10 border border-yellow-500/30 px-3 py-1 rounded-full text-xs flex items-center gap-1 hover:bg-yellow-500/20 transition">
+                <span class="material-symbols-outlined text-sm">admin_panel_settings</span> ADMIN
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-20 pb-24 px-4 max-w-7xl mx-auto">
+
+        <!-- HOME TAB -->
+        <div id="home-tab" class="tab-content animate-fade-up">
+            <!-- Hero Section -->
+            <div class="hero-section premium-card p-8 md:p-12 mb-8 text-center">
+                <div class="hero-content">
+                    <div class="inline-flex items-center gap-2 bg-yellow-500/20 px-4 py-1 rounded-full text-sm mb-6">
+                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                        <span class="text-yellow-500 font-semibold">LIVE TOURNAMENT</span>
+                        <span class="text-white">• 64 SLOTS AVAILABLE</span>
+                    </div>
+                    <h1 class="text-6xl md:text-8xl font-black mb-4">
+                        <span class="bg-gold-gradient bg-clip-text text-transparent">₹45,000</span>
+                    </h1>
+                    <p class="text-2xl md:text-3xl font-bold text-white mb-4">PRIZE POOL</p>
+                    <p class="text-gray-400 max-w-2xl mx-auto mb-8">India's biggest community BGMI tournament. Register your squad, compete with pros, and win big cash prizes.</p>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <button class="btn-premium register-trigger flex items-center gap-2">
+                            <span class="material-symbols-outlined">how_to_reg</span> REGISTER NOW - ₹599
+                        </button>
+                        <button class="btn-outline-premium" id="viewTeamsHomeBtn">
+                            <span class="material-symbols-outlined text-sm">visibility</span> VIEW TEAMS
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features -->
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="premium-card p-6 text-center">
+                    <div class="w-16 h-16 bg-gold-gradient rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <span class="material-symbols-outlined text-black text-3xl">payments</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Secure Payments</h3>
+                    <p class="text-gray-400">Razorpay powered UPI, Cards & Wallet with instant confirmation</p>
+                </div>
+                <div class="premium-card p-6 text-center">
+                    <div class="w-16 h-16 bg-gold-gradient rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <span class="material-symbols-outlined text-black text-3xl">emoji_events</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">₹45,000 Prize Pool</h3>
+                    <p class="text-gray-400">Top 5 teams win cash rewards + MVP award</p>
+                </div>
+                <div class="premium-card p-6 text-center">
+                    <div class="w-16 h-16 bg-gold-gradient rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <span class="material-symbols-outlined text-black text-3xl">verified</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Instant Verification</h3>
+                    <p class="text-gray-400">Auto payment confirmation and team registration</p>
+                </div>
+            </div>
+
+            <!-- Prize Distribution -->
+            <div class="premium-card p-8">
+                <h2 class="text-3xl font-bold text-center mb-8">🏆 PRIZE DISTRIBUTION</h2>
+                <div class="grid md:grid-cols-5 gap-4">
+                    <div class="prize-card first">
+                        <div class="text-4xl mb-2">🥇</div>
+                        <div class="text-2xl font-bold text-yellow-500">₹25,000</div>
+                        <div class="text-sm text-gray-400">Champion</div>
+                    </div>
+                    <div class="prize-card">
+                        <div class="text-4xl mb-2">🥈</div>
+                        <div class="text-xl font-bold text-gray-300">₹12,000</div>
+                        <div class="text-sm text-gray-400">Runner Up</div>
+                    </div>
+                    <div class="prize-card">
+                        <div class="text-4xl mb-2">🥉</div>
+                        <div class="text-xl font-bold text-gray-300">₹8,000</div>
+                        <div class="text-sm text-gray-400">3rd Place</div>
+                    </div>
+                    <div class="prize-card">
+                        <div class="text-3xl mb-2">4️⃣</div>
+                        <div class="text-lg font-bold text-gray-300">₹5,000</div>
+                        <div class="text-sm text-gray-400">4th Place</div>
+                    </div>
+                    <div class="prize-card">
+                        <div class="text-3xl mb-2">5️⃣</div>
+                        <div class="text-lg font-bold text-gray-300">₹3,000</div>
+                        <div class="text-sm text-gray-400">5th Place</div>
+                    </div>
+                </div>
+                <div class="text-center mt-6 pt-4 border-t border-yellow-500/20">
+                    <p class="text-yellow-500">🎯 MVP Award: ₹2,000 + Exclusive Title</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TOURNAMENT TAB -->
+        <div id="tournament-tab" class="tab-content hidden animate-fade-up">
+            <div class="premium-card p-8 mb-6">
+                <h2 class="text-3xl font-bold mb-6">📋 TOURNAMENT RULES</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="material-symbols-outlined text-yellow-500">paid</span>
+                            <span class="font-semibold">Entry Fee: <span class="text-yellow-500">₹599 per squad</span></span>
+                        </div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="material-symbols-outlined text-yellow-500">groups</span>
+                            <span class="font-semibold">Squad: 4 Players + 1 Substitute</span>
+                        </div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="material-symbols-outlined text-yellow-500">map</span>
+                            <span class="font-semibold">Maps: Erangel, Miramar, Sanhok</span>
+                        </div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="material-symbols-outlined text-yellow-500">score</span>
+                            <span class="font-semibold">Scoring: WWCD = 10 pts | 1 Kill = 1 pt</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="material-symbols-outlined text-yellow-500">gpp_bad</span>
+                            <span class="font-semibold">No VPN/Cheats - Instant Disqualification</span>
+                        </div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="material-symbols-outlined text-yellow-500">mail</span>
+                            <span class="font-semibold">Lobby IDs sent via Email/WhatsApp</span>
+                        </div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="material-symbols-outlined text-yellow-500">schedule</span>
+                            <span class="font-semibold">Registration closes at 64 teams</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="premium-card p-8">
+                <h2 class="text-3xl font-bold mb-6">📅 MATCH SCHEDULE</h2>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="bg-black/40 p-5 rounded-xl border-l-4 border-yellow-500">
+                        <p class="text-yellow-500 font-bold text-lg">Qualifiers</p>
+                        <p class="text-gray-300">June 20, 2025</p>
+                        <p class="text-sm text-gray-500">7:00 PM IST • Erangel</p>
+                    </div>
+                    <div class="bg-black/40 p-5 rounded-xl border-l-4 border-gray-600">
+                        <p class="text-gray-400 font-bold text-lg">Semi-Finals</p>
+                        <p class="text-gray-300">June 24, 2025</p>
+                        <p class="text-sm text-gray-500">7:00 PM IST • Miramar</p>
+                    </div>
+                    <div class="bg-black/40 p-5 rounded-xl border-l-4 border-gray-600">
+                        <p class="text-gray-400 font-bold text-lg">Grand Finals</p>
+                        <p class="text-gray-300">June 27, 2025</p>
+                        <p class="text-sm text-gray-500">8:00 PM IST • Sanhok</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- REGISTER TAB -->
+        <div id="register-tab" class="tab-content hidden animate-fade-up">
+            <div class="premium-card p-8">
+                <h2 class="text-3xl font-bold text-center mb-2">📝 SQUAD REGISTRATION</h2>
+                <p class="text-center text-gray-400 mb-6">Entry Fee: <span class="text-yellow-500 text-3xl font-bold">₹599</span> per squad</p>
+
+                <form id="registerForm" class="max-w-2xl mx-auto space-y-5">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">🏆 Squad Name *</label>
+                        <input type="text" id="squadName" class="premium-input w-full" placeholder="e.g., Phoenix Warriors" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">🎮 Captain IGN *</label>
+                        <input type="text" id="captainName" class="premium-input w-full" placeholder="Your in-game name" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">📧 Email ID *</label>
+                        <input type="email" id="email" class="premium-input w-full" placeholder="team@example.com" required>
+                        <p class="text-xs text-gray-500 mt-1">Lobby ID and password will be sent here</p>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">📱 WhatsApp Number *</label>
+                        <input type="tel" id="phone" class="premium-input w-full" placeholder="9876543210" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">⚔️ Preferred Role</label>
+                        <select id="role" class="premium-input w-full">
+                            <option>Assaulter</option>
+                            <option>Support</option>
+                            <option>Sniper</option>
+                            <option>Leader</option>
+                            <option>All-Rounder</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" id="payBtn" class="btn-premium w-full py-4 text-lg flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined">payment</span>
+                        PROCEED TO PAY ₹599
+                    </button>
+                </form>
+
+                <div class="text-center mt-6 pt-4 border-t border-yellow-500/20">
+                    <p class="text-sm text-gray-500">✅ Secured by Razorpay | 💰 100% refund if tournament cancelled</p>
+                    <p class="text-xs text-gray-600 mt-2">🔐 Your payment information is secure and encrypted</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TEAMS TAB -->
+        <div id="teams-tab" class="tab-content hidden animate-fade-up">
+            <div class="flex justify-between items-center mb-6 flex-wrap gap-3">
+                <h2 class="text-3xl font-bold">👥 REGISTERED SQUADS</h2>
+                <div class="bg-yellow-500/20 px-6 py-2 rounded-full">
+                    <span id="teamCount" class="text-yellow-500 font-bold text-2xl">0</span>
+                    <span class="text-white"> / 64 Teams</span>
+                </div>
+            </div>
+            <div id="teamsList" class="space-y-3 max-h-[600px] overflow-y-auto pr-2"></div>
+        </div>
+    </main>
+
+    <!-- Admin Modal -->
+    <div id="adminModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" id="adminBackdrop"></div>
+        <div class="relative modal-premium w-full max-w-5xl max-h-[85vh] overflow-auto p-6">
+            <div class="flex justify-between items-center sticky top-0 pb-3">
+                <h2 class="text-2xl font-bold text-yellow-500">⚙️ ADMIN DASHBOARD</h2>
+                <button id="closeAdmin" class="text-gray-400 hover:text-yellow-500"><span class="material-symbols-outlined">close</span></button>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 my-6">
+                <div class="premium-card p-3 text-center"><p class="text-xs">Total Teams</p><p id="adminTotal" class="text-2xl font-bold text-yellow-500">0</p></div>
+                <div class="premium-card p-3 text-center"><p class="text-xs">Total Collection</p><p id="adminCollection" class="text-2xl font-bold text-green-400">₹0</p></div>
+                <div class="premium-card p-3 text-center"><p class="text-xs">Slots Left</p><p id="adminSlots" class="text-2xl font-bold">64</p></div>
+                <div class="premium-card p-3 text-center"><p class="text-xs">Paid Teams</p><p id="adminPaid" class="text-2xl font-bold text-yellow-500">0</p></div>
+            </div>
+            <div class="flex gap-3 flex-wrap mb-4">
+                <button id="exportCSV" class="btn-outline-premium px-4 py-2 text-sm">📥 EXPORT CSV</button>
+                <button id="exportJSON" class="btn-outline-premium px-4 py-2 text-sm">📄 EXPORT JSON</button>
+                <button id="resetData" class="bg-red-600/50 px-4 py-2 rounded-lg text-sm">⚠️ RESET TOURNAMENT</button>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead class="bg-black/40"><tr><th class="p-3 text-left">#</th><th class="p-3 text-left">Squad</th><th class="p-3 text-left">Captain</th><th class="p-3 text-left">Email</th><th class="p-3 text-left">Payment ID</th><th class="p-3 text-left">Amount</th></tr></thead>
+                    <tbody id="adminTable"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="fixed bottom-28 left-1/2 -translate-x-1/2 z-[110] hidden"></div>
+
+    <script>
+        // Backend URL (change to your deployed backend)
+        const BACKEND_URL = 'http://localhost:3000';
+        const RAZORPAY_KEY = 'rzp_test_T13S7el1uSZDy7';
+        const ENTRY_FEE = 599;
+
+        let teams = JSON.parse(localStorage.getItem('lunatic_teams')) || [];
+
+        function showToast(msg, isError = false) {
+            const toast = document.getElementById('toast');
+            toast.className = `fixed bottom-28 left-1/2 -translate-x-1/2 z-[110] ${isError ? 'bg-red-500/90' : 'bg-green-500/90'} text-white px-6 py-3 rounded-full text-sm shadow-2xl animate-fade-up`;
+            toast.innerHTML = isError ? `❌ ${msg}` : `✅ ${msg}`;
+            toast.classList.remove('hidden');
+            setTimeout(() => toast.classList.add('hidden'), 4000);
+        }
+
+        function saveTeams() {
+            localStorage.setItem('lunatic_teams', JSON.stringify(teams));
+            updateUI();
+        }
+
+        function updateUI() {
+            document.getElementById('teamCount').innerText = teams.length;
+            if(document.getElementById('adminTotal')) document.getElementById('adminTotal').innerText = teams.length;
+            const total = teams.reduce((s, t) => s + (t.amount || ENTRY_FEE), 0);
+            if(document.getElementById('adminCollection')) document.getElementById('adminCollection').innerHTML = `₹${total.toLocaleString()}`;
+            if(document.getElementById('adminSlots')) document.getElementById('adminSlots').innerText = 64 - teams.length;
+            if(document.getElementById('adminPaid')) document.getElementById('adminPaid').innerText = teams.filter(t => t.paymentId && !t.paymentId.startsWith('DEMO')).length;
+
+            // Render teams list
+            const container = document.getElementById('teamsList');
+            if(teams.length === 0) {
+                container.innerHTML = '<div class="premium-card p-10 text-center text-gray-500">✨ No teams registered yet. Be the first!</div>';
+            } else {
+                container.innerHTML = teams.slice().reverse().map((t, i) => `
+                    <div class="premium-card p-4 flex justify-between items-center">
+                        <div><p class="font-bold text-yellow-500">${escapeHtml(t.squadName)}</p><p class="text-sm text-gray-400">Captain: ${escapeHtml(t.captain)} | ${t.role}</p><p class="text-xs text-green-400">✓ Paid ₹${t.amount || ENTRY_FEE}</p></div>
+                        <div class="text-right"><span class="text-2xl font-bold text-yellow-500">#${teams.length - i}</span></div>
+                    </div>
+                `).join('');
+            }
+
+            // Render admin table
+            const adminTable = document.getElementById('adminTable');
+            if(adminTable) {
+                adminTable.innerHTML = teams.slice().reverse().map((t, i) => `
+                    <tr class="border-b border-gray-800"><td class="p-3">${teams.length - i}</td><td class="p-3 font-bold text-yellow-500">${escapeHtml(t.squadName)}</td><td class="p-3">${escapeHtml(t.captain)}</td><td class="p-3 text-sm">${t.email}</td><td class="p-3 text-xs">${t.paymentId?.substring(0,12) || 'N/A'}</td><td class="p-3">₹${t.amount || ENTRY_FEE}</td></tr>
+                `).join('');
+            }
+        }
+
+        function escapeHtml(str) { return String(str).replace(/[&<>]/g, function(m){ return m==='&'?'&amp;':m==='<'?'&lt;':'&gt;';}); }
+
+        // Payment
+        async function processPayment(teamData) {
+            const btn = document.getElementById('payBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> Creating order...';
+            btn.disabled = true;
+
+            try {
+                const res = await fetch(`${BACKEND_URL}/api/create-order`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ amount: ENTRY_FEE * 100, currency: 'INR' })
+                });
+                const order = await res.json();
+                if(!order.success) throw new Error(order.error);
+
+                const options = {
+                    key: RAZORPAY_KEY,
+                    amount: order.amount,
+                    currency: order.currency,
+                    name: "Lunatic's BGMI Tournament",
+                    description: `Registration: ${teamData.squadName}`,
+                    order_id: order.order_id,
+                    prefill: { name: teamData.captain, email: teamData.email, contact: teamData.phone },
+                    theme: { color: '#FFD700' },
+                    handler: async function(response) {
+                        const verifyRes = await fetch(`${BACKEND_URL}/api/verify-payment`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                razorpay_order_id: response.razorpay_order_id,
+                                razorpay_payment_id: response.razorpay_payment_id,
+                                razorpay_signature: response.razorpay_signature
+                            })
+                        });
+                        const verify = await verifyRes.json();
+                        if(verify.success) {
+                            teams.push({ ...teamData, paymentId: response.razorpay_payment_id, amount: ENTRY_FEE, registeredAt: new Date().toISOString() });
+                            saveTeams();
+                            showToast(`Squad "${teamData.squadName}" registered successfully!`);
+                            document.getElementById('registerForm').reset();
+                            document.querySelector('[data-tab="teams"]').click();
+                        } else {
+                            showToast('Payment verification failed!', true);
+                        }
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                    },
+                    modal: { ondismiss: () => { btn.innerHTML = originalText; btn.disabled = false; showToast('Payment cancelled', true); } }
+                };
+                const rzp = new Razorpay(options);
+                rzp.open();
+            } catch(err) {
+                showToast(err.message, true);
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        // Form submit
+        document.getElementById('registerForm')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const squadName = document.getElementById('squadName').value.trim();
+            const captain = document.getElementById('captainName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const role = document.getElementById('role').value;
+
+            if(!squadName || !captain || !email || !phone) { showToast('All fields required!', true); return; }
+            if(teams.length >= 64) { showToast('Tournament full! Max 64 teams.', true); return; }
+            if(!/^[^\s@]+@([^\s@]+\.)+[^\s@]+$/.test(email)) { showToast('Invalid email!', true); return; }
+            if(!/^[6-9]\d{9}$/.test(phone)) { showToast('Valid 10-digit mobile required!', true); return; }
+            if(teams.some(t => t.squadName.toLowerCase() === squadName.toLowerCase())) { showToast('Squad name already taken!', true); return; }
+
+            processPayment({ squadName, captain, email, phone, role });
+        });
+
+        // Tab switching
+        document.querySelectorAll('.tab-premium').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab-premium').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                const tabId = tab.getAttribute('data-tab');
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.add('hidden'));
+                document.getElementById(`${tabId}-tab`).classList.remove('hidden');
+            });
+        });
+
+        document.querySelectorAll('.register-trigger').forEach(btn => {
+            btn.addEventListener('click', () => document.querySelector('[data-tab="register"]').click());
+        });
+        document.getElementById('viewTeamsHomeBtn')?.addEventListener('click', () => document.querySelector('[data-tab="teams"]').click());
+
+        // Admin
+        const adminModal = document.getElementById('adminModal');
+        document.getElementById('adminBtn')?.addEventListener('click', () => { updateUI(); adminModal.classList.remove('hidden'); adminModal.style.display = 'flex'; });
+        document.getElementById('closeAdmin')?.addEventListener('click', () => { adminModal.classList.add('hidden'); adminModal.style.display = 'none'; });
+        document.getElementById('adminBackdrop')?.addEventListener('click', () => { adminModal.classList.add('hidden'); adminModal.style.display = 'none'; });
+
+        document.getElementById('exportCSV')?.addEventListener('click', () => {
+            let csv = "Squad,Captain,Email,Phone,Role,Payment,Amount,Date\n";
+            teams.forEach(t => csv += `"${t.squadName}","${t.captain}","${t.email}","${t.phone}","${t.role}","${t.paymentId}",${t.amount||ENTRY_FEE},"${t.registeredAt}"\n`);
+            const blob = new Blob([csv], {type:'text/csv'}); const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob); a.download = `lunatic_teams_${Date.now()}.csv`; a.click(); URL.revokeObjectURL(a.href);
+            showToast('CSV exported!');
+        });
+
+        document.getElementById('exportJSON')?.addEventListener('click', () => {
+            const blob = new Blob([JSON.stringify(teams, null, 2)], {type:'application/json'});
+            const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `lunatic_teams_${Date.now()}.json`; a.click(); URL.revokeObjectURL(a.href);
+            showToast('JSON exported!');
+        });
+
+        document.getElementById('resetData')?.addEventListener('click', () => {
+            if(confirm('⚠️ WARNING: This will delete ALL registered teams!')) { teams = []; saveTeams(); showToast('All data cleared.'); }
+        });
+
+        updateUI();
+    </script>
+</body>
+</html>
